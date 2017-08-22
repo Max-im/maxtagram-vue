@@ -3,7 +3,7 @@
     <div class="container_flex">
       <div class="photoGrid__item" v-for="(post, index) in posts">
         <h3 class="photoGrid__header">{{post.title}}</h3>
-        <img class="photoGrid__img" :src="post.thumbnailUrl" alt="">
+        <img class="photoGrid__img" :src="'../../assets/img/'+post.photoMin" alt="">
         <router-link class="photoGrid__readMore" :to="{name: 'post', params: {id: index} }">подробнее</router-link> 
       </div>
     </div>
@@ -15,37 +15,39 @@
 
 
 <script>
+import db from '../../assets/db.js';
+
 export default {
   name: 'photoGrid',
   data () {
     return {
-      link: 'https://jsonplaceholder.typicode.com/photos',
-      posts: []      
+      // link: 'https://jsonplaceholder.typicode.com/photos',
+      posts: db      
     }
   },
   methods:{
-    getPosts: function() {
+    // getPosts: function() {
       
-      const options = {
-        params: {
-          _start: 800,
-          _limit : 30 
-        }
-      }
+    //   const options = {
+    //     params: {
+    //       _start: 800,
+    //       _limit : 30 
+    //     }
+    //   }
 
-      this.$http.get(this.link, options)
-        .then(
-          function(response) {
-            this.posts = response.body;
-          },
-          function(error) {
+    //   this.$http.get(this.link, options)
+    //     .then(
+    //       function(response) {
+    //         this.posts = response.body;
+    //       },
+    //       function(error) {
 
-          }
-        )
-    }
+    //       }
+    //     )
+    // }
   },
   created: function() {
-    this.getPosts();
+    // this.getPosts();
   }
 
 }
@@ -90,7 +92,9 @@ export default {
     text-transform: uppercase;
     font-weight: 100;
     text-shadow: 1px 1px 2px black;
-    padding: 10px;
+    width: calc(100% - 20px);
+    left: 10px;
+    top: 10px;
     box-sizing: border-box;
     z-index: 1;
   }

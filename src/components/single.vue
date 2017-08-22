@@ -2,11 +2,11 @@
   <div class="single">
     <div v-if="post">
       <div class="container_flex">
-        <img class="single__img" :src='post.url' alt="">
+        <img class="single__img" :src='"../../assets/img/"+post.photo' alt="">
         <div class="single__content">
           <span class="single__number">post# {{post.id}}</span>
           <h3 class="single__header">{{post.title}}</h3>
-          <p class="single__text">{{post.title }} {{post.title }} {{post.title }} {{post.title }} {{post.title }} {{post.title }}</p>
+          <p class="single__text">{{post.text }}</p>
           <router-link class="single__back" to="/">назад</router-link> 
         </div>
       </div>
@@ -20,42 +20,44 @@
 
 
 <script>
+import db from '../../assets/db.js';
+
 export default {
   name: 'single',
   data () {
     return {
-      link: 'https://jsonplaceholder.typicode.com/photos',
-      posts: [],
+      // link: 'https://jsonplaceholder.typicode.com/photos',
+      posts: db,
       post: null      
     }
   },
   methods:{
 
-    getPosts: function() {
-      const options = {
-        params: {
-          _start: 800,
-          _limit : 30 
-        }
-      }
-      const postId = this.$route.params.id;
+    // getPosts: function() {
+    //   const options = {
+    //     params: {
+    //       _start: 800,
+    //       _limit : 30 
+    //     }
+    //   }
 
-      this.$http.get(this.link, options)
-        .then(
-          function(response) {
+    //   this.$http.get(this.link, options)
+    //     .then(
+    //       function(response) {
 
-            this.posts = response.body;
+    //         this.posts = response.body;
             
-            this.post = this.posts[postId];
-          },
-          function(error) {
+    //       },
+    //       function(error) {
 
-          }
-        )
-    }
+    //       }
+    //     )
+    // }
   },
   created: function() {
-    this.getPosts();
+    // this.getPosts();
+      const postId = this.$route.params.id;
+      this.post = this.posts[postId];
 
   }
 
