@@ -3,7 +3,7 @@
     <div class="container_flex">
       <div class="photoGrid__item" v-for="(post, index) in posts">
         <h3 class="photoGrid__header">{{post.title}}</h3>
-        <img class="photoGrid__img" :src="'../../assets/img/'+post.photoMin" alt="">
+        <img class="photoGrid__img" :src="'./src/assets/img/'+post.photoMin" alt="">
         <router-link class="photoGrid__readMore" :to="{name: 'post', params: {id: index} }">подробнее</router-link> 
       </div>
     </div>
@@ -15,7 +15,7 @@
 
 
 <script>
-import db from '../../assets/db.js';
+import db from '../assets/db.js';
 
 export default {
   name: 'photoGrid',

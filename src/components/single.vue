@@ -2,11 +2,16 @@
   <div class="single">
     <div v-if="post">
       <div class="container_flex">
-        <img class="single__img" :src='"../../assets/img/"+post.photo' alt="">
+        <img class="single__img" :src='"./src/assets/img/"+post.photo' alt="">
         <div class="single__content">
           <span class="single__number">post# {{post.id}}</span>
           <h3 class="single__header">{{post.title}}</h3>
           <p class="single__text">{{post.text }}</p>
+          <ul class="single__categoryList">
+            <li class="single__categoryItem" v-for="item in post.category">
+              <a  class="single__categoryLink" href="#">{{item}}</a>
+            </li>
+          </ul>
           <router-link class="single__back" to="/">назад</router-link> 
         </div>
       </div>
@@ -20,7 +25,7 @@
 
 
 <script>
-import db from '../../assets/db.js';
+import db from '../assets/db.js';
 
 export default {
   name: 'single',
@@ -108,6 +113,25 @@ export default {
       background: #ff2d00;
       color: #fff;
       transition: all .4s;
+    }
+  }
+  &__categoryList{
+    list-style: none;
+  }
+  &__categoryItem{
+    display: inline-block;
+  }
+  &__categoryLink{
+    display: block;
+    padding: 0 20px;
+    margin: 0 5px;
+    border-radius: 100px;
+    color: #fff;
+    border:2px solid #fff;
+    background: #333;
+    &:hover{
+      border:2px solid #ff2d00;
+      background: rgba(0,0,0,.6);
     }
   }
 }
